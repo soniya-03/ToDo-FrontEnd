@@ -17,3 +17,34 @@
     ]
   }
 }
+// {
+//   "compilerOptions": {
+//     "target": "esnext",
+//     "module": "esnext",
+//     "moduleResolution": "node",
+//     "strict": true,
+//     "jsx": "preserve",
+//     "esModuleInterop": true,
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "lib": [
+//       "esnext",
+//       "dom",
+//       "dom.iterable",
+//       "scripthost"
+//     ],
+//     "allowSyntheticDefaultImports": true, 
+//     "skipLibCheck": true,
+//     "forceConsistentCasingInFileNames": true
+//   },
+//   "include": [
+//     "src/**/*.ts",
+//     "src/**/*.d.ts",
+//     "src/**/*.tsx",
+//     "src/**/*.vue"
+//   ],
+//   "exclude": [
+//     "node_modules"
+//   ], 
+// }
+
