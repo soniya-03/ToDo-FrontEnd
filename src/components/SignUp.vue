@@ -1,62 +1,84 @@
-
-
 <template>
-  <div>
-    <h2 style="color: #333;">Signup</h2>
-    <form @submit.prevent="signup" style="max-width: 300px; margin: auto;">
-      <div style="margin-bottom: 15px;">
-        <label for="username">Username:</label>
-        <input v-model="username" type="text" id="username" required style="width: 100%; padding: 8px;" />
+  <div class="registration-form-container">
+    <form @submit.prevent="register" class="registration-form">
+      <h2>Register</h2>
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" v-model="name" required placeholder="Enter your name">
       </div>
-      <div style="margin-bottom: 15px;">
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" v-model="email" required placeholder="Enter your email">
+      </div>
+
+      <div class="form-group">
         <label for="password">Password:</label>
-        <input v-model="password" type="password" id="password" required style="width: 100%; padding: 8px;" />
+        <input type="password" v-model="password" required placeholder="Enter your password">
       </div>
-      <div style="margin-bottom: 15px;">
-        <label for="confirmPassword">Confirm Password:</label>
-        <input v-model="confirmPassword" type="password" id="confirmPassword" required style="width: 100%; padding: 8px;" />
-      </div>
-      <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer;">Signup</button>
+
+      <button type="submit">Register</button>
     </form>
-    <div v-if="signupStatus" style="margin-top: 15px; color: #4CAF50;">
-      {{ signupStatus }}
-      <!-- Redirect to the RegistrationSuccess page after successful signup -->
-      <router-link v-if="signupStatus === 'Successfully signed up!'" to="/registration-success" style="color: #4CAF50;">View Registration Details</router-link>
-    </div>
   </div>
 </template>
 
-<script>
-import { ref } from 'vue';
-import axios from 'axios';
+<style scoped>
+.registration-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-export default {
-  setup() {
-    const username = ref('');
-    const password = ref('');
-    const confirmPassword = ref('');
-    const signupStatus = ref(null);
+.registration-form {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
 
-    const signup = async () => {
-      if (password.value !== confirmPassword.value) {
-        signupStatus.value = 'Passwords do not match';
-        return;
-      }
+h2 {
+  text-align: center;
+  color: #333;
+}
 
-      try {
-        const response = await axios.post('http://localhost:3000/users/register', {
-          username: username.value,
-          password: password.value,
-        });
+.form-group {
+  margin-bottom: 20px;
+}
 
-        signupStatus.value = response.data.message; // Assuming your backend sends a success message
-      } catch (error) {
-        signupStatus.value = 'Signup failed. Please try again.';
-        console.error('Signup Error:', error);
-      }
-    };
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
 
-    return { username, password, confirmPassword, signupStatus, signup };
-  },
-};
-</script>
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #28a745; /* Green color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+</style>

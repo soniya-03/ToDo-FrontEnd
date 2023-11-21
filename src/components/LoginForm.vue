@@ -1,110 +1,79 @@
 <template>
-  <div>
-    <h2>Login</h2>
-    <form @submit.prevent="loginUser">
-      <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" v-model="username" required />
+  <div class="login-form-container">
+    <form @submit.prevent="login" class="login-form">
+      <h2>Login</h2>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" v-model="email" required placeholder="Enter your email">
       </div>
-      <div>
+
+      <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required />
+        <input type="password" v-model="password" required placeholder="Enter your password">
       </div>
+
       <button type="submit">Login</button>
     </form>
-
-    <TaskList v-if="loginSuccess" :tasks="tasks" @add-task="addTask" @complete-task="completeTask" />
   </div>
 </template>
 
-<script>
-import { mapActions } from 'vuex';
-import axios from 'axios'; // Import axios here
-import TaskList from './TaskList.vue';
+<style scoped>
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-export default {
-  components: {
-    TaskList,
-  },
-  data() {
-    return {
-      username: '',
-      password: '',
-      loginSuccess: false,
-      tasks: [],
-    };
-  },
-  methods: {
-    ...mapActions(['loginUser']),
+.login-form {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
 
-    async loginUser() {
-      try {
-        const credentials = { username: this.username, password: this.password };
-        await this.loginUser(credentials);
+h2 {
+  text-align: center;
+  color: #333;
+}
 
-        // Set loginSuccess to true when login is successful
-        this.loginSuccess = true;
+.form-group {
+  margin-bottom: 20px;
+}
 
-        // Retrieve user tasks after successful login
-        this.tasks = await this.fetchUserTasks();
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
 
-        // Redirect to LoginSuccessful component after successful login
-        this.$router.push("/login-successful");
-      } catch (error) {
-        console.error("Login failed", error);
-        // Handle login failure
-      }
-    },
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
-    async fetchUserTasks() {
-      // Call the API to fetch the user's tasks
-      const response = await axios.get(`/api/users/${this.username}/tasks`);
-      return response.data.tasks || [];
-    },
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-    addTask(newTask) {
-    
-      this.tasks.push(newTask);
-
-     
-      axios.post(`/api/users/${this.username}/add-task`, { task: newTask });
-    },
-
-    completeTask(index) {
-     
-      this.tasks.splice(index, 1);
-
-      // Call the API to complete the task for the user
-      axios.post(`/api/users/${this.username}/complete-task/${index}`);
-    },
-  },
-};
-</script>
-
-<style>
-
-  form {
-    max-width: 300px;
-    margin: auto;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-  }
-
-  button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-  }
+button:hover {
+  background-color: #0056b3;
+}
 </style>
-

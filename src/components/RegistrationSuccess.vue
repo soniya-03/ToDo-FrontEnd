@@ -10,6 +10,7 @@
 <script>
 import { defineComponent } from 'vue';
 import { RouterLink } from 'vue-router';
+//import baseApiUrl from './api';
 
 export default defineComponent({
   components: {
