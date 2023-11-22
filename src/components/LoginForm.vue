@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="login-form-container">
     <form @submit.prevent="login" class="login-form">
       <h2>Login</h2>
@@ -76,4 +76,182 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-</style>
+</style> -->
+
+
+
+<!-- <template>
+  <div>
+    <h2>Login</h2>
+    <form @submit.prevent="login">
+      <label>Email:</label>
+      <input v-model="email" type="email" required />
+      <label>Password:</label>
+      <input v-model="password" type="password" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('http://localhost:3000/users/login', {
+          email: this.email,
+          password: this.password,
+        });
+        console.log(response.data); // Handle the response as needed, maybe store the token
+      } catch (error) {
+        console.error(error.response.data); // Handle errors
+      }
+    },
+  },
+};
+</script> -->
+
+<!-- Login.vue -->
+<!-- <template>
+  <div>
+    <h2>Login</h2>
+    <form @submit.prevent="login">
+      <label>Email:</label>
+      <input v-model="email" type="email" required />
+      <label>Password:</label>
+      <input v-model="password" type="password" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('http://localhost:3000/users/login', {
+          email: this.email,
+          password: this.password,
+        });
+
+        console.log(response.data);
+
+        // Assuming the backend returns a token on successful login
+        const token = response.data.token;
+
+        // Store the token in localStorage or Vuex for future requests
+        localStorage.setItem('token', token);
+
+        // Redirect to the add task page
+        this.$router.push('/add');
+      } catch (error) {
+        console.error(error.response.data); // Handle errors
+      }
+    },
+  },
+};
+</script> -->
+/
+<!-- LoginForm.vue -->
+<!-- <template>
+  <div>
+    <h2>Login</h2>
+    <form @submit.prevent="login">
+      <label>Email:</label>
+      <input v-model="email" type="email" required />
+      <label>Password:</label>
+      <input v-model="password" type="password" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('http://localhost:3000/users/login', {
+          email: this.email,
+          password: this.password,
+        });
+
+        // Assuming a successful login, you can store the token in localStorage or Vuex
+        // Redirect to the taskList page
+        this.$router.push('/add');
+      } catch (error) {
+        console.error(error.response.data); // Handle errors
+      }
+    },
+  },
+};
+</script> -->
+
+
+<template>
+  <div>
+    <h2>Login</h2>
+    <form @submit.prevent="login">
+      <label>Email:</label>
+      <input v-model="email" type="email" required />
+      <label>Password:</label>
+      <input v-model="password" type="password" required />
+      <!-- <router-link to="/addTask">Login</router-link> -->
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        await axios.post('http://localhost:3000/users/login', {
+          email: this.email,
+          password: this.password,
+        });
+
+        // Assuming a successful login, you can store the token in localStorage or Vuex
+        // Redirect to the taskList page
+        this.$router.push('/addTask');
+      } catch (error) {
+        console.error(error.response.data); // Handle errors
+      }
+    },
+  },
+};
+</script>

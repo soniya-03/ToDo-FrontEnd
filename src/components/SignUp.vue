@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="registration-form-container">
     <form @submit.prevent="register" class="registration-form">
       <h2>Register</h2>
@@ -81,4 +81,165 @@ button {
 button:hover {
   background-color: #218838; /* Darker green on hover */
 }
-</style>
+</style> -->
+
+
+<!-- <template>
+  <div>
+    <h2>Signup</h2>
+    <form @submit.prevent="signup">
+      <label>Name:</label>
+      <input v-model="name" required />
+      <label>Email:</label>
+      <input v-model="email" type="email" required />
+      <label>Password:</label>
+      <input v-model="password" type="password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      name: 'abc',
+      email: 'abc@gmail.com',
+      password: 'abc1234',
+    };
+  },
+  methods: {
+    async signup() {
+      try {
+        const response = await axios.post('http://localhost:3000/users', {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        });
+        console.log(response.data); // Handle the response as needed
+      } catch (error) {
+        console.error(error.response.data); // Handle errors
+      }
+    },
+  },
+};
+</script> -->
+
+<!-- <template>
+  <div>
+    <h2>Signup</h2>
+    <form @submit.prevent="signUp">
+      <label>Name:</label>
+      <input v-model="name" required />
+      <label>Email:</label>
+      <input v-model="email" type="email" required />
+      <label>Password:</label>
+      <input v-model="password" type="password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      name: 'abc',
+      email: 'abc@gmail.com',
+      password: 'abc1234',
+    };
+  },
+  methods: { -->
+    // async signUp() {
+    //   try {
+    //     const response = await axios.post('http://localhost:3000/users', {
+    //       name: this.name,
+    //       email: this.email,
+    //       password: this.password,
+    //     });
+        
+    //     console.log(response.data); // This may be undefined, check the structure of your response
+
+    //     // Assuming you receive a successful response, you can redirect to the login page
+    //     this.$router.push('/login');
+    //   } catch (error) {
+    //     console.error(error.response.data); // Handle errors
+    //   }
+    // },
+
+
+//     async signUp() {
+//   try {
+//     const response = await axios.post('http://localhost:3000/users', {
+//       name: this.name,
+//       email: this.email,
+//       password: this.password,
+//     });
+
+//     if (response) {
+//       console.log(response.data);
+//       // Assuming you receive a successful response, you can redirect to the login page
+//       this.$router.push('/login');
+//     } else {
+//       console.error('Unexpected response:', response);
+//     }
+//   } catch (error) {
+//     console.error('Error:', error.response ? error.response.data : error.message);
+//   }
+// },
+
+//  
+
+
+
+<template>
+  <div>
+    <h2>Signup</h2>
+    <form @submit.prevent="signUp">
+      <label>Name:</label>
+      <input v-model="name" required />
+      <label>Email:</label>
+      <input v-model="email" type="email" required />
+      <label>Password:</label>
+      <input v-model="password" type="password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    async signUp() {
+      try {
+        const response = await axios.post('http://localhost:3000/users', {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        });
+
+        console.log(response.data);
+
+        // Assuming you receive a successful response, redirect to the login page
+        this.$router.push('/login'); 
+      } catch (error) {
+        console.error(error.response.data);
+      }
+    },
+  },
+};
+</script>
+
